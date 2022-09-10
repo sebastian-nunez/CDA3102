@@ -30,7 +30,7 @@
       - [Overflow (2's Complement)](#overflow-2s-complement)
     - [Hexadecimal (Table)](#hexadecimal-table)
     - [**MIPS Fields (R vs. I)**](#mips-fields-r-vs-i)
-    - [**MIPS Architecture**](#mips-architecture)
+    - [**MIPS Architecture (Table)**](#mips-architecture-table)
 
 ## **Chaper 1: Computers and Abstract Tech**
 
@@ -142,7 +142,7 @@
 
 ![MIPS Fields](images/2.13%20MIPS%20Fields.png)
 
-### **MIPS Architecture**
+### **MIPS Architecture (Table)**
 
 ![MIPS Architecture](images/2.14%20MIPS%20Architecture.png)
 
