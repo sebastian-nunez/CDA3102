@@ -29,6 +29,7 @@
       - [**Two's Complement**](#twos-complement)
       - [Overflow (2's Complement)](#overflow-2s-complement)
     - [Hexadecimal (Table)](#hexadecimal-table)
+    - [MIPS Fields](#mips-fields)
     - [**MIPS Fields (R vs. I)**](#mips-fields-r-vs-i)
     - [**MIPS Architecture (Table)**](#mips-architecture-table)
 
@@ -137,6 +138,10 @@
 ### Hexadecimal (Table)
 
 ![Hexadecimal (Table)](<images/2.12%20Hexadecimal%20(Table).png>)
+
+### MIPS Fields
+
+![MIPS Fields](images/2.13%20MIPS%20Fields.png)
 
 ### **MIPS Fields (R vs. I)**
 
