@@ -35,6 +35,7 @@
     - [**MIPS Logical Operators**](#mips-logical-operators)
     - [Bitwise Shifts (Multiplication/Division)](#bitwise-shifts-multiplicationdivision)
     - [Bitwise Masks (&)](#bitwise-masks-)
+    - [Conditional Jump (beq and bne)](#conditional-jump-beq-and-bne)
 
 ## **Chaper 1: Computers and Abstract Tech**
 
