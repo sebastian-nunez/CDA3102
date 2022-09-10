@@ -32,6 +32,9 @@
     - [MIPS Fields](#mips-fields)
     - [**MIPS Fields (R vs. I)**](#mips-fields-r-vs-i)
     - [**MIPS Architecture (Table)**](#mips-architecture-table)
+    - [**MIPS Logical Operators**](#mips-logical-operators)
+    - [Bitwise Shifts (Multiplication/Division)](#bitwise-shifts-multiplicationdivision)
+    - [Bitwise Masks (&)](#bitwise-masks-)
 
 ## **Chaper 1: Computers and Abstract Tech**
 
@@ -151,4 +154,19 @@
 
 ![MIPS Architecture](images/2.14%20MIPS%20Architecture.png)
 
+### **MIPS Logical Operators**
+
+![MIPS Logical Operators](images/2.15%20MIPS%20Logical%20Operators.png)
+
+### Bitwise Shifts (Multiplication/Division)
+
+![Bitwise Shifts (Multiplication/Division)](images/2.16%20Bitwise%20Shifts.png)
+
+### Bitwise Masks (&)
+
+![Bitwise Masks (&)](<images/2.17%20Bit%20"Masks"%20(&).png>)
+
+### Conditional Jump (beq and bne)
+
+![Conditional Jump (beq and bneq)](images/2.18%20Conditional%20Jump.png)
 [Back to top](#cda3102---computer-architecture)
