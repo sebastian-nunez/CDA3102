@@ -7,7 +7,7 @@
     - [Storage Sizes (Table)](#storage-sizes-table)
     - [Memory Hierarchy](#memory-hierarchy)
     - [Measuring Performance (Table)](#measuring-performance-table)
-    - [CPU Performance (Formula)](#cpu-performance-formula)
+    - [**CPU Performance (Formula)**](#cpu-performance-formula)
     - [Power Consumption (Formula)](#power-consumption-formula)
   - [**Chapter 2: Instructions (MIPS)**](#chapter-2-instructions-mips)
     - [Instructions Set](#instructions-set)
@@ -59,7 +59,7 @@
 
 ![Measuring CPU Performance](<images/1.5%20CPU%20Performance%20(Table).png>)
 
-### CPU Performance (Formula)
+### **CPU Performance (Formula)**
 
 ![CPU Performance Formula](images/1.6%20CPU%20Performance%20Formula.png)
 
