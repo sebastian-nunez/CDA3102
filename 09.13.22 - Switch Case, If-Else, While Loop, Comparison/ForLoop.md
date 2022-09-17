@@ -84,7 +84,7 @@ for (i = 0; i <= j; i++) {
 Start: add $s3, $zero, $zero          # i = 0
 
 For: slt $t0, $s4, $s3 $t0            # (j < i) ? 1 : 0
-bne $t0, $zero, Exit                  # i >= j -> exit
+bne $t0, $zero, Exit                  # i > j -> exit
 
 add $s1, $s3, 1                       # g = i + j
 

@@ -36,6 +36,24 @@
     - [Bitwise Shifts (Multiplication/Division)](#bitwise-shifts-multiplicationdivision)
     - [Bitwise Masks (&)](#bitwise-masks-)
     - [Conditional Jump (beq and bne)](#conditional-jump-beq-and-bne)
+    - [**While Loops**](#while-loops)
+      - [While Loop](#while-loop)
+      - [While Loop (Break/Continue)](#while-loop-breakcontinue)
+      - [For Loop (Less than)](#for-loop-less-than)
+      - [For Loop (Less than or Equal to)](#for-loop-less-than-or-equal-to)
+    - [Signed vs. Unsigned Comparisons (Out-of-Bounds)](#signed-vs-unsigned-comparisons-out-of-bounds)
+    - [Switch Case and Jump Tables (jr)](#switch-case-and-jump-tables-jr)
+      - [Switch Case](#switch-case)
+    - [**Procedures**](#procedures)
+    - [Jump and Link, Return Address, Program Count](#jump-and-link-return-address-program-count)
+    - [Stack](#stack)
+    - [**Procedure (Example)**](#procedure-example)
+    - [Nested Procedures](#nested-procedures)
+    - [Nested Procedure (Example)](#nested-procedure-example)
+    - [Global Pointer and Preserved Registers](#global-pointer-and-preserved-registers)
+    - [Frame Pointer](#frame-pointer)
+    - [**Allocating Data on the Heap**](#allocating-data-on-the-heap)
+    - [**MIPS Register Conventions (Table)**](#mips-register-conventions-table)
 
 ## **Chaper 1: Computers and Abstract Tech**
 
@@ -170,4 +188,239 @@
 ### Conditional Jump (beq and bne)
 
 ![Conditional Jump (beq and bneq)](images/2.18%20Conditional%20Jump.png)
+
+### **While Loops**
+
+![While loops](images/2.7%20While%20Loops.png)
+
+#### While Loop
+
+```c
+// variable declarations...
+
+while (i != j) {
+    f = i + h;
+    i = f + h;
+}
+```
+
+```mips
+# Assumptions:
+# f is stored in $s0,
+# g is stored in $s1
+# h is stored in $s2
+# i is stored in $s3
+# j is stored in $s4
+
+# START
+Start: beq $s3, $s4, Exit          # i == j exit
+
+add $s0, $s3, $s0                  # f = i + h
+add $s3, $s0, $s2                  # i = f + h
+
+j Start
+
+
+Exit:
+```
+
+#### While Loop (Break/Continue)
+
+```c
+// variable declarations...
+
+while (i != j) {
+    f = i + h;
+    i = f + h;
+
+    if (f == j)
+        continue
+
+    if (f == i)
+        break
+}
+```
+
+```mips
+# Assumptions:
+# f is stored in $s0,
+# g is stored in $s1
+# h is stored in $s2
+# i is stored in $s3
+# j is stored in $s4
+
+# START
+Start: beq $s3, $s4, Exit          # i == j exit
+
+add $s0, $s3, $s0                  # f = i + h
+add $s3, $s0, $s2                  # i = f + h
+
+beq $s0, $s4, Start                # f == j -> continue
+beq $s0, $s3, Exit                 # f == i -> break
+
+j Start
+
+
+Exit:
+```
+
+#### For Loop (Less than)
+
+```c
+// variable declarations...
+
+for (i = 0; i < j; i++) {
+    g = i + j;
+}
+```
+
+```mips
+# Assumptions:
+# f is stored in $s0
+# g is stored in $s1
+# h is stored in $s2
+# i is stored in $s3
+# j is stored in $s4
+
+Start: add $s3, $zero, $zero          # i = 0
+
+For: slt $t0, $s3, $s4 $t0            # (i < j) ? 1 : 0
+beq $t0, $zero, Exit                  # i >= j -> exit
+
+add $s1, $s3, 1                       # g = i + j
+
+addi $s3, $s3, 1
+j For
+
+Exit:
+```
+
+#### For Loop (Less than or Equal to)
+
+```c
+// variable declarations...
+
+for (i = 0; i <= j; i++) {
+    g = i + j;
+}
+```
+
+```mips
+# Assumptions:
+# f is stored in $s0
+# g is stored in $s1
+# h is stored in $s2
+# i is stored in $s3
+# j is stored in $s4
+
+# i <= j is equal to !(j < i) --> "j is not less than i"
+
+Start: add $s3, $zero, $zero          # i = 0
+
+For: slt $t0, $s4, $s3 $t0            # (j < i) ? 1 : 0
+bne $t0, $zero, Exit                  # i > j -> exit
+
+add $s1, $s3, 1                       # g = i + j
+
+addi $s3, $s3, 1
+j For
+
+Exit:
+```
+
+### Signed vs. Unsigned Comparisons (Out-of-Bounds)
+
+![Signed vs. Unsigned Comparisons](images/2.7%20Signed%20vs%20Unsigned%20Comparisons.png)
+
+### Switch Case and Jump Tables (jr)
+
+![Switch Case and Jump Tables (jr)](<images/2.8%20Switch%20Case%20and%20Jump%20Tables%20(jr).png>)
+
+#### Switch Case
+
+```c
+// variable declarations...
+
+switch(f) {
+    case 1:
+        g = i + j;
+    case 5:
+        h = i + j;
+        break;
+    case 3:
+        g = i - j;
+    default:
+    i = h + i + j
+}
+```
+
+```mips
+# Assumptions:
+# f is stored in $s0,
+# g is stored in $s1
+# h is stored in $s2
+# i is stored in $s3
+# j is stored in $s4
+
+# START
+Start: addi $t0, $s0, -1               # $t0 = f - 1
+bne $t0, $zero, First
+add $s1, $s3, $s4                      # g = i + j
+j Second
+
+First: addi $t0, $s0, -5               # $t0 = f - 5
+bne $t0, $zero, Third
+Second: add $s2, $s3, $s4              # h = i + j
+j Exit
+
+Third: addi $t0, $s0, -3               # $t0 = f - 3
+bne $t0, $zero, Fourth
+sub $s1, $s3, $s2
+
+Fourth: add $s3, $s2, $s3              # i = h + i
+add $s3, $s3, $s4                      # i = i + j
+j Exit
+
+Exit:
+```
+
+### **Procedures**
+
+![Procedures](images/2.8%20Procedures.png)
+
+### Jump and Link, Return Address, Program Count
+
+![2.8 Jump and Link, Return Address, Program Count](images/2.8%20Jump%20and%20Link,%20Return%20Address,%20Program%20Count.png)
+
+### Stack
+
+![Stack](images/2.8%20Stack.png)
+
+### **Procedure (Example)**
+
+![Procedure Example](images/2.8%20Procedure%20Example.png)
+
+### Nested Procedures
+
+![Nested Procedures](images/2.8%20Nested%20Procedures.png)
+
+### Nested Procedure (Example)
+
+![Nested Procedure (Example)](images/2.8%20Nested%20Procedure%20Example.png)
+
+### Global Pointer and Preserved Registers
+
+![Global Pointer and Preserved Registers](images/2.8%20Global%20Pointer%20and%20Preserved%20Registers.png)
+
+### Frame Pointer
+
+![Frame Pointer](images/2.8%20Frame%20Pointer.png)
+
+### **Allocating Data on the Heap**
+
+![Allocating Data on the Heap](images/2.8%20Allocating%20Data%20on%20the%20Heap.png)
+
+### **MIPS Register Conventions (Table)**
+
+![MIPS Register Conventions (Table)](images/2.8%20MIPS%20Register%20Conventions.png)
 [Back to top](#cda3102---computer-architecture)
