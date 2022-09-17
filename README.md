@@ -119,6 +119,8 @@
 
 ![Unconditional Jump](images/2.3.5%20MIPS%20Unconditional%20Jump.png)
 
+[Back to top](#cda3102---computer-architecture)
+
 ### Words (32-Bit)
 
 ![Words (32-Bit)](<images/2.4 Words (32-Bit).png>)
@@ -137,7 +139,9 @@
 
 ### Binary Digits (Bits)
 
-![Binary Digits (Bits)](<images/2.9%20Binary%20Digits%20(Bits).png>P)
+![Binary Digits (Bits)](<images/2.9%20Binary%20Digits%20(Bits).png>)
+
+[Back to top](#cda3102---computer-architecture)
 
 ### Overflow
 
@@ -156,6 +160,8 @@
 #### Overflow (2's Complement)
 
 ![Overflow](images/2.11.2.1%20Two's%20Complement%20Overflow.png)
+
+[Back to top](#cda3102---computer-architecture)
 
 ### Hexadecimal (Table)
 
@@ -176,6 +182,8 @@
 ### **MIPS Logical Operators**
 
 ![MIPS Logical Operators](images/2.15%20MIPS%20Logical%20Operators.png)
+
+[Back to top](#cda3102---computer-architecture)
 
 ### Bitwise Shifts (Multiplication/Division)
 
@@ -328,6 +336,8 @@ j For
 Exit:
 ```
 
+[Back to top](#cda3102---computer-architecture)
+
 ### Signed vs. Unsigned Comparisons (Out-of-Bounds)
 
 ![Signed vs. Unsigned Comparisons](images/2.7%20Signed%20vs%20Unsigned%20Comparisons.png)
@@ -384,6 +394,8 @@ j Exit
 Exit:
 ```
 
+[Back to top](#cda3102---computer-architecture)
+
 ### **Procedures**
 
 ![Procedures](images/2.8%20Procedures.png)
@@ -411,6 +423,7 @@ Exit:
 ### Global Pointer and Preserved Registers
 
 ![Global Pointer and Preserved Registers](images/2.8%20Global%20Pointer%20and%20Preserved%20Registers.png)
+[Back to top](#cda3102---computer-architecture)
 
 ### Frame Pointer
 
@@ -423,4 +436,119 @@ Exit:
 ### **MIPS Register Conventions (Table)**
 
 ![MIPS Register Conventions (Table)](images/2.8%20MIPS%20Register%20Conventions.png)
+
+### **ASCII (Table)**
+
+![ASCII Table](<images/2.9%20ASCII%20(Table).png>)
+
+### 32-Bit Immidiate Operands (lui, ori)
+
+![32-Bit Immidiate Operands (lui, ori)](images/2.9%2032-bit%20Immidiate%20Operands.png)
+
+#### 32-Bit Operand (Example)
+
+![32-Bit Operand (Example)](images/2.9%2032-bit%20operand%20example.png)
+
+[Back to top](#cda3102---computer-architecture)
+
+### Addressing in Branches and Jumps
+
+![Addressing in Branches and Jumps](images/2.9%20Addressing%20in%20Branches%20and%20Jumps.png)
+
+#### Branches Offset (Example)
+
+![Branches Offset (Example)](<images/2.9%20Branches%20Offset%20(Example).png>)
+
+### **MIPS Addressing Modes (Table)**
+
+![MIPS Addressing Modes (Table)](<images/2.9%20MIPS%20Addressing%20Modes%20(Table).png>)
+
+### Encoding MIPS to Machine Language (Table)
+
+![Encoding MIPS to Machine Language](images/2.9%20Encoding%20MIPS%20to%20Machine%20Language.png)
+
+#### Decoding Machine Code (Example)
+
+![Decoding Machine Code (Example)](<images/2.9%20Decoding%20Machine%20Code%20(Example).png>)
+
+[Back to top](#cda3102---computer-architecture)
+
+### **MIPS All Instruction Formats (R, I and J)**
+
+![MIPS All Instruction Formats (R, I and J)](images/2.9%20MIPS%20All%20Instruction%20Formats.png)
+
+### **Parallelism and Synchronization (Locks, Mutual Exclusion, Atomic Exchanges)**
+
+![Parallelism and Synchronization (Locks, Mutual Exclusion, Atomic Exchanges)](images/2.11%20Parallelism%20and%20Synchronization.png)
+
+#### **MIPS Load Linked and Conditional Store**
+
+![MIPS Load Linked and Conditional Store](images/2.11%20MIPS%20Load%20Linked%20and%20Conditional%20Store.png)
+
+### Program Translation (C -> Compiler -> Assembler -> Linker -> Loader)
+
+![Program Translation](<images/2.12%20Program%20Translation%20(from%20.c%20to%20a.out).png>)
+
+[Back to top](#cda3102---computer-architecture)
+
+#### Compiler and Assembler
+
+![Compiler and Assembler](images/2.12%20Complier%20&%20Assembler.png)
+
+#### Linker and Executable File
+
+![Linked and Executable File](images/2.12%20Linked%20and%20Executable%20File.png)
+
+#### Loader
+
+![Loader](images/2.12%20Loader.png)
+
+#### Dynamically Linked Libraries
+
+![Dynamically Linked Libraries](images/2.12%20Dynamically%20Linked%20Libraries.png)
+
+### Java Programs (Java Bytecode, JVM Interpreter, JIT Compiler)
+
+![Java Programs (Java Bytecode, JVM Interpreter, JIT Compiler)](<images/2.12%20Java%20Programs%20(Java%20Bytecode,%20JVM%20Interpreter,%20JIT%20Compiler).png>)
+
+[Back to top](#cda3102---computer-architecture)
+
+### **Swap Two Numbers (Procedure Example)**
+
+```c
+void swap(int v[], int k)
+{
+    int temp;
+    temp = v[k];
+    v[k] = v[k+1];
+    v[k+1] = temp;
+}
+```
+
+1. Allocate registers to program variables.
+2. Produce code for the body of the procedure.
+3. Preserve registers across the procedure invocation.
+
+```mips
+# Recall that the memory address for MIPS refers to
+# the byte address, and so words are really 4 bytes apart.
+# Hence we need to multiply the index k by 4 before adding it to the address. # Forgetting that sequential word addresses differ by 4 instead of by 1 is a
+# common mistake in assembly language programming. Hence the first step is to
+# get the address of v[k] by multiplying k by 4 via a shift left by 2:
+
+swap: sll   $t1, $a1, 2     # reg $t1 = k * 4
+add   $t1, $a0, $t1         # reg $t1 = v + (k * 4)
+                            # reg $t1 has the address of v[k]
+
+
+lw    $t0, 0($t1)           # reg $t0 (temp) = v[k]
+lw    $t2, 4($t1)           # reg $t2 = v[k + 1]
+                            # refers to next element of v
+
+sw    $t2, 0($t1)           # v[k] = reg $t2
+sw    $t0, 4($t1)           # v[k + 1] = reg $t0 (temp)
+
+jr    $ra                   # return to calling routine
+```
+
 [Back to top](#cda3102---computer-architecture)
