@@ -552,3 +552,39 @@ jr    $ra                   # return to calling routine
 ```
 
 [Back to top](#cda3102---computer-architecture)
+
+## **Chaper 3: Arithmetic for Computers**
+
+### Addition and Subtraction
+
+![Addtion and subtraction](./images/3.1%20Add%20and%20Sub.png)
+
+### Overflow Cases
+
+![Overflow Cases](./images/3.1.2%20Overflow%20Cases.png)
+
+### Arithmetic Logic Unit (ALU)
+
+![Arithmetic Logic Unit (ALU)](<./images/3.1.3%20Arithmetic%20Logic%20Unit%20(ALU).png>)
+
+### Multiplication (Parallel Addition)
+
+![Multiplication (Parallel Addition)](<./images/3.1.3%20Arithmetic%20Logic%20Unit%20(ALU).png>)
+
+### Division
+
+![Divisions](./images/3.3%20Division.png)
+
+### Faster Division
+
+![Faster Division](./images/3.3.2%20Faster%20Division.png)
+
+### **MIPS Arithemtic (Table)**
+
+![MIPS Arithemtic (Table)](<./images/3.3.2%20MIPS%20Arithemtic%20(Table).png>)
+
+### Remainder is Stored in "mfhi"
+
+![Remainder is Stored in "mfhi"](./images/3.4.2%20Remainder%20is%20Stored%20in%20"mfhi".png)
+
+[Back to top](#cda3102---computer-architecture)
